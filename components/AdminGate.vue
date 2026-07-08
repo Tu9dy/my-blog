@@ -104,7 +104,7 @@ const passwordInput = ref<HTMLInputElement | null>(null)
 
 // Simple password check (client-side only — not real security)
 // Change this to your own password
-const ADMIN_PASSWORD = 'studio2026'
+const ADMIN_PASSWORD = 'Maxinyu233.'
 
 function openModal() {
   showModal.value = true
