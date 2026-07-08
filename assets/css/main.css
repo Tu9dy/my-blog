@@ -2,33 +2,162 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════════
+   Warm Studio — Design System
+   ═══════════════════════════════════════════ */
+
 @layer base {
+  :root {
+    --bg: #F5F0E8;
+    --bg-surface: #EDE8DE;
+    --bg-elevated: #E5DFD4;
+    --text: #1A1814;
+    --text-muted: #6B6560;
+    --text-subtle: #9A948C;
+    --border: #D8D2C8;
+    --accent: #D4502A;
+    --accent-glow: #E8623A;
+    --grain-opacity: 0.025;
+  }
+
+  .dark {
+    --bg: #0C0C0E;
+    --bg-surface: #131316;
+    --bg-elevated: #1A1A1F;
+    --text: #E8E4DC;
+    --text-muted: #8A8578;
+    --text-subtle: #5A564E;
+    --border: #252422;
+    --accent: #E8623A;
+    --accent-glow: #FF8A65;
+    --grain-opacity: 0.035;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
-    @apply bg-gray-950 text-gray-300 font-sans antialiased;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Plus Jakarta Sans', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+    transition: background-color 0.4s ease, color 0.4s ease;
   }
 
+  /* Grain overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+  }
+
+  /* Selection */
   ::selection {
-    @apply bg-brand-600/40 text-white;
+    background-color: var(--accent);
+    color: white;
   }
 
-  /* Scrollbar styling */
+  /* Scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-gray-900;
+    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-gray-700 rounded-full;
+    background: var(--border);
+    border-radius: 100px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-600;
+    background: var(--text-subtle);
+  }
+
+  /* Smooth transitions for theme switching — scoped to non-interactive elements */
+  body *, body *::before, body *::after {
+    transition-property: background-color, border-color, color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      transition-duration: 0s !important;
+      animation-duration: 0s !important;
+    }
   }
 }
 
 @layer components {
   .container-blog {
-    @apply max-w-4xl mx-auto px-4 sm:px-6;
+    @apply max-w-4xl mx-auto px-5 sm:px-8;
+  }
+
+  .container-wide {
+    @apply max-w-6xl mx-auto px-5 sm:px-8;
+  }
+
+  /* Stagger animation delays */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+  .stagger-6 { animation-delay: 0.6s; }
+  .stagger-7 { animation-delay: 0.7s; }
+  .stagger-8 { animation-delay: 0.8s; }
+
+  /* Section divider */
+  .divider {
+    @apply h-px w-full;
+    background: linear-gradient(to right, var(--accent), var(--border), transparent);
+  }
+
+  /* Accent dot */
+  .accent-dot {
+    @apply inline-block w-1.5 h-1.5 rounded-full;
+    background-color: var(--accent);
+  }
+
+  /* Page transition */
+  .page-enter-active {
+    transition: all 0.4s ease-out;
+  }
+  .page-leave-active {
+    transition: all 0.2s ease-in;
+  }
+  .page-enter-from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  .page-leave-to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 24px -4px color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
+  .border-accent-subtle {
+    border-color: color-mix(in srgb, var(--accent) 20%, var(--border));
   }
 }

@@ -1,31 +1,62 @@
 <template>
   <article class="group">
-    <NuxtLink :to="`/blog/${post.slug}`" class="block p-5 -mx-5 rounded-xl hover:bg-gray-800/40 transition-all duration-200">
-      <!-- Date -->
-      <div class="flex items-center gap-3 mb-3">
-        <time class="text-sm text-gray-500 font-mono">{{ formatDate(post.date) }}</time>
-        <span v-if="post.readingTime" class="text-sm text-gray-600">&middot; {{ post.readingTime }} min</span>
-      </div>
+    <NuxtLink
+      :to="`/blog/${post.slug}`"
+      class="block py-6 transition-all duration-300"
+      :style="{ borderBottom: '1px solid var(--border)' }"
+    >
+      <div class="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-8">
+        <!-- Date Column -->
+        <div class="sm:w-28 shrink-0">
+          <time class="text-xs font-mono tracking-wide" :style="{ color: 'var(--text-subtle)' }">
+            {{ formatDate(post.date) }}
+          </time>
+        </div>
 
-      <!-- Title -->
-      <h2 class="text-xl font-semibold text-gray-100 group-hover:text-brand-400 transition-colors mb-2">
-        {{ post.title }}
-      </h2>
+        <!-- Content Column -->
+        <div class="flex-1 min-w-0">
+          <!-- Title -->
+          <h2
+            class="text-lg font-display font-semibold leading-snug mb-1.5 transition-colors duration-300"
+            :style="{ color: 'var(--text)' }"
+          >
+            <span class="group-hover:text-gradient transition-all duration-300">
+              {{ post.title }}
+            </span>
+            <span
+              class="inline-block ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+              :style="{ color: 'var(--accent)' }"
+            >&rarr;</span>
+          </h2>
 
-      <!-- Description -->
-      <p class="text-gray-400 text-sm leading-relaxed line-clamp-2 mb-4">
-        {{ post.description }}
-      </p>
+          <!-- Description -->
+          <p class="text-sm leading-relaxed line-clamp-2 mb-3" :style="{ color: 'var(--text-muted)' }">
+            {{ post.description }}
+          </p>
 
-      <!-- Tags -->
-      <div v-if="post.tags?.length" class="flex flex-wrap gap-2">
-        <span
-          v-for="tag in post.tags"
-          :key="tag"
-          class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-mono font-medium bg-gray-800 text-gray-400 border border-gray-700/50"
-        >
-          {{ tag }}
-        </span>
+          <!-- Tags -->
+          <div v-if="post.tags?.length" class="flex flex-wrap gap-1.5">
+            <span
+              v-for="tag in post.tags"
+              :key="tag"
+              class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono font-medium tracking-wide"
+              :style="{
+                color: 'var(--accent)',
+                backgroundColor: 'color-mix(in srgb, var(--accent) 8%, transparent)',
+                border: '1px solid color-mix(in srgb, var(--accent) 15%, transparent)',
+              }"
+            >
+              {{ tag }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Reading Time -->
+        <div v-if="post.readingTime" class="hidden sm:block shrink-0">
+          <span class="text-xs font-mono" :style="{ color: 'var(--text-subtle)' }">
+            {{ post.readingTime }} min
+          </span>
+        </div>
       </div>
     </NuxtLink>
   </article>

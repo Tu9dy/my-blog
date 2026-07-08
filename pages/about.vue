@@ -1,49 +1,127 @@
 <template>
-  <div class="container-blog py-12">
-    <section class="max-w-3xl">
-      <h1 class="text-3xl sm:text-4xl font-bold text-gray-100 mb-2">
-        About <span class="text-brand-400">Me</span>
+  <div class="container-blog py-16 sm:py-24">
+    <!-- Page Header -->
+    <section class="mb-16 opacity-0 animate-fade-up">
+      <p class="text-xs font-mono font-medium uppercase tracking-[0.2em] mb-4" :style="{ color: 'var(--accent)' }">
+        About
+      </p>
+      <h1 class="text-3xl sm:text-4xl font-display font-bold tracking-tight mb-4" :style="{ color: 'var(--text)' }">
+        About <span class="text-gradient">Me</span>
       </h1>
-      <div class="h-1 w-16 bg-brand-500 rounded-full mb-10"></div>
+      <div class="divider mb-10" />
 
-      <div class="prose prose-invert max-w-none">
-        <p>
-          你好！我是一名热爱技术的全栈开发者，专注于前端工程和用户体验优化。
-        </p>
+      <p class="text-base leading-relaxed max-w-xl mb-8" :style="{ color: 'var(--text-muted)' }">
+        你好！我是一名热爱技术的全栈开发者，专注于前端工程和用户体验优化。
+      </p>
+    </section>
 
-        <h2>技术栈</h2>
-        <p>
-          我日常使用 Vue.js / Nuxt.js 构建 Web 应用，对 TypeScript 有深入的理解和实践。
-          在后端方面，我熟悉 Node.js 和 Python，能够独立完成从数据库到前端的全链路开发。
-        </p>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-8">
-          <div class="p-4 rounded-xl bg-gray-800/50 border border-gray-700/50">
-            <h3 class="text-sm font-mono font-semibold text-brand-400 mb-3">Frontend</h3>
-            <div class="flex flex-wrap gap-2">
-              <span v-for="tech in frontendTech" :key="tech" class="px-2 py-1 rounded text-xs font-mono bg-gray-900 text-gray-400 border border-gray-700/50">{{ tech }}</span>
-            </div>
-          </div>
-          <div class="p-4 rounded-xl bg-gray-800/50 border border-gray-700/50">
-            <h3 class="text-sm font-mono font-semibold text-brand-400 mb-3">Backend</h3>
-            <div class="flex flex-wrap gap-2">
-              <span v-for="tech in backendTech" :key="tech" class="px-2 py-1 rounded text-xs font-mono bg-gray-900 text-gray-400 border border-gray-700/50">{{ tech }}</span>
-            </div>
+    <!-- Tech Stack -->
+    <section class="mb-16 opacity-0 animate-fade-up stagger-2">
+      <h2 class="text-xs font-mono font-semibold uppercase tracking-[0.15em] mb-6" :style="{ color: 'var(--text-subtle)' }">
+        Tech Stack
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div
+          class="rounded-2xl p-5 transition-all duration-300"
+          :style="{
+            backgroundColor: 'var(--bg-surface)',
+            border: '1px solid var(--border)',
+          }"
+        >
+          <h3 class="text-xs font-mono font-semibold uppercase tracking-[0.15em] mb-4" :style="{ color: 'var(--accent)' }">
+            Frontend
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            <span
+              v-for="tech in frontendTech"
+              :key="tech"
+              class="px-2.5 py-1 rounded-lg text-xs font-mono font-medium"
+              :style="{
+                color: 'var(--text-muted)',
+                backgroundColor: 'var(--bg-elevated)',
+                border: '1px solid var(--border)',
+              }"
+            >{{ tech }}</span>
           </div>
         </div>
-
-        <h2>工作经历</h2>
-        <div class="space-y-6 my-6">
-          <div v-for="exp in experiences" :key="exp.company" class="relative pl-6 border-l-2 border-gray-800 hover:border-brand-500/50 transition-colors">
-            <div class="absolute left-[-5px] top-1.5 w-2 h-2 rounded-full bg-gray-700"></div>
-            <h3 class="text-lg font-semibold text-gray-200">{{ exp.role }}</h3>
-            <p class="text-sm text-brand-400 font-mono">{{ exp.company }} &middot; {{ exp.period }}</p>
-            <p class="text-sm text-gray-400 mt-2">{{ exp.description }}</p>
+        <div
+          class="rounded-2xl p-5 transition-all duration-300"
+          :style="{
+            backgroundColor: 'var(--bg-surface)',
+            border: '1px solid var(--border)',
+          }"
+        >
+          <h3 class="text-xs font-mono font-semibold uppercase tracking-[0.15em] mb-4" :style="{ color: 'var(--accent)' }">
+            Backend
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            <span
+              v-for="tech in backendTech"
+              :key="tech"
+              class="px-2.5 py-1 rounded-lg text-xs font-mono font-medium"
+              :style="{
+                color: 'var(--text-muted)',
+                backgroundColor: 'var(--bg-elevated)',
+                border: '1px solid var(--border)',
+              }"
+            >{{ tech }}</span>
           </div>
         </div>
+      </div>
+    </section>
 
-        <h2>兴趣爱好</h2>
-        <p>
+    <!-- Experience -->
+    <section class="mb-16 opacity-0 animate-fade-up stagger-3">
+      <h2 class="text-xs font-mono font-semibold uppercase tracking-[0.15em] mb-6" :style="{ color: 'var(--text-subtle)' }">
+        Experience
+      </h2>
+      <div class="space-y-0">
+        <div
+          v-for="(exp, index) in experiences"
+          :key="exp.company"
+          class="relative pl-8 pb-8 last:pb-0"
+        >
+          <!-- Timeline Line -->
+          <div
+            v-if="index < experiences.length - 1"
+            class="absolute left-[5px] top-3 bottom-0 w-px"
+            :style="{ backgroundColor: 'var(--border)' }"
+          />
+          <!-- Timeline Dot -->
+          <div
+            class="absolute left-0 top-1.5 w-[11px] h-[11px] rounded-full"
+            :style="{
+              backgroundColor: index === 0 ? 'var(--accent)' : 'var(--bg-elevated)',
+              border: `2px solid ${index === 0 ? 'var(--accent)' : 'var(--border)'}`,
+            }"
+          />
+          <!-- Content -->
+          <h3 class="text-base font-display font-semibold mb-1" :style="{ color: 'var(--text)' }">
+            {{ exp.role }}
+          </h3>
+          <p class="text-xs font-mono tracking-wide mb-2" :style="{ color: 'var(--accent)' }">
+            {{ exp.company }} &middot; {{ exp.period }}
+          </p>
+          <p class="text-sm leading-relaxed" :style="{ color: 'var(--text-muted)' }">
+            {{ exp.description }}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interests -->
+    <section class="opacity-0 animate-fade-up stagger-4">
+      <h2 class="text-xs font-mono font-semibold uppercase tracking-[0.15em] mb-6" :style="{ color: 'var(--text-subtle)' }">
+        Interests
+      </h2>
+      <div
+        class="rounded-2xl p-5"
+        :style="{
+          backgroundColor: 'var(--bg-surface)',
+          border: '1px solid var(--border)',
+        }"
+      >
+        <p class="text-sm leading-relaxed" :style="{ color: 'var(--text-muted)' }">
           工作之余，我喜欢阅读技术文章和开源项目源码，参与社区讨论。
           也喜欢跑步和摄影，用不同的视角观察世界。
         </p>
@@ -54,7 +132,7 @@
 
 <script setup lang="ts">
 useHead({
-  title: '关于我 - Dev Blog',
+  title: '关于我 - Studio',
 })
 
 const frontendTech = ['Vue 3', 'Nuxt 3', 'TypeScript', 'Tailwind CSS', 'React', 'Vite', 'Pinia']

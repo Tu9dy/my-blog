@@ -5,20 +5,24 @@ export default defineNuxtConfig({
     '@nuxt/content',
   ],
 
+  tailwindcss: {
+    cssPath: '~/assets/css/main.css',
+  },
+
   app: {
     head: {
-      title: 'Dev Blog',
+      title: 'Studio — Developer Portfolio',
       htmlAttrs: { lang: 'zh-CN' },
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: '一个开发者的技术博客' },
+        { name: 'description', content: 'A developer\'s journal on frontend engineering, system design, and creative coding.' },
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        { href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap', rel: 'stylesheet' },
+        { href: 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,100..900,0..100;1,9..144,100..900,0..100&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap', rel: 'stylesheet' },
       ],
     },
   },

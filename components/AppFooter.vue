@@ -1,30 +1,39 @@
 <template>
-  <footer class="border-t border-gray-800 bg-gray-950">
-    <div class="container-blog py-10">
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div class="flex items-center gap-2">
-          <span class="font-mono text-brand-400">&lt;/&gt;</span>
-          <span class="text-sm text-gray-500">Dev Blog &copy; {{ year }}</span>
+  <footer
+    class="mt-auto"
+    :style="{ borderTop: '1px solid var(--border)' }"
+  >
+    <div class="container-blog py-12">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+        <!-- Left: Brand -->
+        <div class="flex items-center gap-3">
+          <span class="text-base font-display font-bold tracking-tight" :style="{ color: 'var(--text)' }">
+            studio<span class="text-gradient">.</span>
+          </span>
+          <span class="text-xs" :style="{ color: 'var(--text-subtle)' }">&copy; {{ year }}</span>
         </div>
 
-        <div class="flex items-center gap-4">
+        <!-- Center: Social Links -->
+        <div class="flex items-center gap-5">
           <a
             v-for="link in socialLinks"
             :key="link.label"
             :href="link.href"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-gray-500 hover:text-gray-300 transition-colors"
+            class="transition-all duration-300 hover:scale-110"
+            :style="{ color: 'var(--text-subtle)' }"
             :title="link.label"
+            @mouseenter="$event.target.style.color = 'var(--accent)'"
+            @mouseleave="$event.target.style.color = 'var(--text-subtle)'"
           >
-            <component :is="link.icon" class="w-5 h-5" />
+            <component :is="link.icon" class="w-[18px] h-[18px]" />
           </a>
         </div>
-      </div>
 
-      <div class="mt-6 text-center">
-        <p class="text-xs text-gray-600 font-mono">
-          Built with Nuxt 3 &middot; Deployed on Vercel
+        <!-- Right: Built with -->
+        <p class="text-xs font-mono" :style="{ color: 'var(--text-subtle)' }">
+          Nuxt 3 &middot; Vercel
         </p>
       </div>
     </div>
@@ -53,7 +62,7 @@ const socialLinks = [
     label: 'Email',
     href: 'mailto:hello@example.com',
     icon: defineComponent({
-      template: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
+      template: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
     }),
   },
 ]
