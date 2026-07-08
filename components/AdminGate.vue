@@ -133,10 +133,10 @@ function verify() {
   }
 }
 
-// Global keyboard shortcut: Ctrl+Shift+M
+// Global keyboard shortcut: Ctrl+Shift+X
 onMounted(() => {
   const handler = (e: KeyboardEvent) => {
-    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'm') {
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'x') {
       e.preventDefault()
       // If already on admin page and authenticated, do nothing
       if (useRoute().path === '/admin' && sessionStorage.getItem('admin_auth')) return
